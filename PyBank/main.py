@@ -1,19 +1,22 @@
-# Modules
+# Import modules to read and write csv file
 import os
 import csv
 
-# Path to collect data from the Resources folder
+# Designate the path to collect data from the csv file in the Resources folder
 csvpath = os.path.join('Resources', 'budget_data.csv')
 
+#Read the csv file
 with open(csvpath) as csvfile:
-
     csvreader = csv.reader(csvfile, delimiter=',')
+    # skip the header
     next(csvfile, None)
    
+    # Set initial lists
     months = []
     profits = []
     change = []
 
+    # add data to my lists
     for row in csvreader: 
         month = row[0]
         profit = int(row[1])
@@ -37,10 +40,13 @@ with open(csvpath) as csvfile:
 
     # Calculate the greatest increase in profits (max value)
     maxchange = max(change)
-
+    
     # Calculate the greaatest decrease in profits (min value)
     minchange = min(change)
 
+    # find date for maxchange and minchange
+ 
+        
     # Print Financial Analysis
     print ("Financial Analysis")
     print ("------------------------------")
@@ -50,6 +56,7 @@ with open(csvpath) as csvfile:
     print (f"Greatest Increase in Profits: ($" + str(maxchange) + ")")
     print (f"Greatest Decrease in Profits: ($" + str(minchange) + ")")
 
+# Write analysis to new text file
 report = open('financial-analysis.txt', 'w')
 report.write ("Financial Analysis" + '\n')
 report.write ("------------------------------" + '\n')
